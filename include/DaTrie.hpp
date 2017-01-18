@@ -3,7 +3,6 @@
 
 #include <algorithm>
 #include <cassert>
-#include <stack>
 
 #include "Basic.hpp"
 
@@ -643,15 +642,16 @@ protected:
 
     using NodePair = std::pair<uint32_t, uint32_t>;
 
-    std::stack<NodePair> node_pairs;
-    node_pairs.push({ROOT_POS, ROOT_POS});
+    std::vector<NodePair> np_stack;
+    np_stack.reserve(num_nodes());
+    np_stack.push_back({ROOT_POS, ROOT_POS});
 
     rhs_trie.fix_(ROOT_POS, rhs_trie.blocks_);
     rhs_trie.bc_[ROOT_POS].set_check(INVALID_VALUE);
 
-    while (!node_pairs.empty()) {
-      const NodePair node_pair = node_pairs.top();
-      node_pairs.pop();
+    while (!np_stack.empty()) {
+      const NodePair node_pair = np_stack.back();
+      np_stack.pop_back();
 
       if (WithNLM) {
         rhs_trie.node_links_[node_pair.second] = node_links_[node_pair.first];
@@ -680,7 +680,7 @@ protected:
         auto rhs_child_pos = rhs_base ^label;
         rhs_trie.fix_(rhs_child_pos, rhs_trie.blocks_);
         rhs_trie.bc_[rhs_child_pos].set_check(node_pair.second);
-        node_pairs.push({bc_[node_pair.first].base() ^ label, rhs_child_pos});
+        np_stack.push_back({bc_[node_pair.first].base() ^ label, rhs_child_pos});
       }
     }
   }
