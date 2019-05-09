@@ -2,7 +2,7 @@
 
 The __ddd__ is an experimental library for dynamic double-array dictionaries through some techniques, used for the article
 
-* Shunsuke Kanda, Yuma Fujita, Kazuhiro Morita, and Masao Fuketa,"Practical rearrangement methods for dynamic double-array dictionaries," Software: Practice and Experience, 2017. (Early View) [[doi](http://dx.doi.org/10.1002/spe.2516)]
+* Shunsuke Kanda, Yuma Fujita, Kazuhiro Morita, and Masao Fuketa,"Practical rearrangement methods for dynamic double-array dictionaries," Software: Practice and Experience, 48(1): 65–83, 2018 [[pdf](https://github.com/kampersanda/ddd/blob/master/paper/SPE2018.pdf)] [[doi](http://dx.doi.org/10.1002/spe.2516)]
 
 You can download and compile __ddd__ as the following commands:
 
